@@ -44,4 +44,4 @@ class Test
 end
 end
 
-MiniTest::Reporters.use! Aviator::Test::ProgressReporter.new
+MiniTest::Reporters.use! Aviator::Test::SpecReporter.new
