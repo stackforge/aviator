@@ -12,15 +12,19 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
 ]
 SimpleCov.start do
   add_filter '/test/'
-  
+
   add_group 'Core', 'lib/aviator/core'
   add_group 'OpenStack', 'lib/aviator/openstack'
 end
 
 require 'minitest/autorun'
 
-# Do not require these gems when running in the CI
-unless ENV['CI'] || ENV['TRAVIS']
+# May be used by other test helpers under test/support
+def running_in_ci
+  ['BUILD_NUMBER', 'CI', 'JENKINS_URL'].any? { |name| ENV.key? name }
+end
+
+unless running_in_ci
   require 'pry'
 end
 
